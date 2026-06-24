@@ -1,0 +1,8 @@
+//
+// Created by Сергей on 24/06/2026.
+//
+
+#ifndef FINANCEMANAGER_WALLET_H
+#define FINANCEMANAGER_WALLET_H
+
+#endif //FINANCEMANAGER_WALLET_H
