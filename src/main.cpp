@@ -18,5 +18,6 @@ int main()
     wallet.addTransaction(fuel);
     cout << "Balance: " << wallet.getBalance() << endl;
 
+    wallet.showHistory();
     return 0;
 }

@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Wallet.h"
 #include <vector>
 using namespace std;
@@ -22,4 +23,23 @@ double Wallet::getBalance()
         }
     }
     return balance;
+}
+void Wallet::showHistory()
+{
+    for (const auto& transaction : transactions)
+    {
+        if (transaction.getIncome() == true)
+        {
+            cout << " Income | ";
+        }
+        else
+        {
+            cout << "Expense | ";
+        }
+        cout << transaction.getCategory() << " | "
+             << transaction.getDescription() << " | "
+             << transaction.getAmount() << " | ";
+
+    }
+
 }

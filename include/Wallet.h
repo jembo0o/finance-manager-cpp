@@ -12,4 +12,5 @@ private:
 public:
     void addTransaction(const Transaction& transaction);
     double getBalance();
+    void showHistory();
 };
