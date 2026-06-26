@@ -34,7 +34,8 @@ void Wallet::showHistory()
         }
         else
         {
-            cout << "Expense | ";
+            cout << endl;
+            cout << " Expense | ";
         }
         cout << transaction.getCategory() << " | "
              << transaction.getDescription() << " | "

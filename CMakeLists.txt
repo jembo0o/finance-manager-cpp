@@ -9,5 +9,7 @@ add_executable(FinanceManager src/main.cpp
         include/Transaction.h
         include/Wallet.h
         src/Transaction.cpp
-        src/Wallet.cpp)
+        src/Wallet.cpp
+        include/FinanceManager.h
+        src/FinanceManager.cpp)
 target_include_directories(FinanceManager PRIVATE include)
