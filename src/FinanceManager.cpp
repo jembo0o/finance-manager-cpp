@@ -142,7 +142,7 @@ void FinanceManager::addIncome()
         break;
     }
 
-    cout << "\nDescription ";
+    cout << "\nDescription: ";
     getline(cin, description);
 
     Transaction income(amount, category, description, true);
@@ -152,6 +152,7 @@ void FinanceManager::addIncome()
 void FinanceManager::addExpense()
 {
     double amount;
+    int categoryChoice;
     string category;
     string description;
 
@@ -159,14 +160,65 @@ void FinanceManager::addExpense()
     cout << "║        ADD EXPENSE         ║\n";
     cout << "╚════════════════════════════╝\n";
 
-    cout << "Amount: ";
-    cin >> amount;
+    while (true)
+    {
+        cout << "\nAmount: ";
+        cin >> amount;
+        if (amount > 0)
+        {
+            break;
+        }
+        cout << "Invalid amount! Please enter a value greater than 0\n";
+    }
+    while (true)
+    {
+        cout << "\nChoose category:\n";
+        cout << "1. Food\n";
+        cout << "2. Transport\n";
+        cout << "3. Rent\n";
+        cout << "4. Entertainment\n";
+        cout << "5. Shopping\n";
+        cout << "6. Health\n";
+        cout << "7. Education\n";
+        cout << "8. Bills\n";
+        cout << "9. Other\n";
+        cout << "> ";
+        cin >> categoryChoice;
+        if (categoryChoice >= 1 && categoryChoice <= 9){ break; }
+        cout << "\nInvalid option! Please try again.\n";
+    }
     cin.ignore();
-
-    cout << "Category: ";
-    getline(cin, category);
-
-    cout << "Description ";
+    switch (categoryChoice)
+    {
+    case 1:
+        category = "Food";
+        break;
+    case 2:
+        category = "Transport";
+        break;
+    case 3:
+        category = "Rent";
+        break;
+    case 4:
+        category = "Entertainment";
+        break;
+    case 5:
+        category = "Shopping";
+        break;
+    case 6:
+        category = "Health";
+        break;
+    case 7:
+        category = "Education";
+        break;
+    case 8:
+        category = "Bills";
+        break;
+    case 9:
+        category = "Other";
+        break;
+    }
+    cout << "\nDescription: ";
     getline(cin, description);
 
     Transaction expense(amount, category, description, false);

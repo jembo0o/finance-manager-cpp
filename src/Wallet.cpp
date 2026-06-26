@@ -49,7 +49,7 @@ void Wallet::showHistory()
         }
 
         cout << "║ "
-             << setw(2) << id << " ║ "
+             << right << setw(2) << id << " ║ "
              << left << setw(8) << type << " ║ "
              << left << setw(12) << transaction.getCategory() << " ║ "
              << right << setw(12) << transaction.getAmount() << " ║ "
