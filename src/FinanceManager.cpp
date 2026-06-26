@@ -1,3 +1,4 @@
+#include <iomanip>
 #include "FinanceManager.h"
 #include <iostream>
 
@@ -70,6 +71,8 @@ void FinanceManager::changeCurrency()
 
 void FinanceManager::showMenu()
 {
+    cout << fixed << setprecision(2);
+
     cout << endl;
     cout << "╔══════════════════════════════════════════════╗" << endl;
     cout << "║              FINANCE MANAGER                 ║" << endl;
@@ -87,19 +90,59 @@ void FinanceManager::showMenu()
 void FinanceManager::addIncome()
 {
     double amount;
+    int categoryChoice;
     string category;
     string description;
+
     cout << "\n╔════════════════════════════╗\n";
     cout << "║        ADD INCOME          ║\n";
     cout << "╚════════════════════════════╝\n";
-    cout << "Amount: ";
-    cin >> amount;
+
+   while (true)
+   {
+       cout << "\nAmount: ";
+       cin >> amount;
+       if (amount > 0)
+       {
+           break;
+       }
+       cout << "Invalid amount! Please enter a value greater than 0\n";
+   }
     cin.ignore();
+    while (true)
+    {
+        cout << "\nChoose category:\n";
+        cout << "1. Salary\n";
+        cout << "2. Freelance\n";
+        cout << "3. Gift\n";
+        cout << "4. Investment\n";
+        cout << "5. Other\n";
+        cout << "> ";
+        cin >> categoryChoice;
+        if (categoryChoice >= 1 && categoryChoice <= 5){ break; }
+        cout << "\nInvalid option! Please try again.\n";
+    }
+    cin.ignore();
+    switch (categoryChoice)
+    {
+    case 1:
+        category = "Salary";
+        break;
+    case 2:
+        category = "Freelance";
+        break;
+    case 3:
+        category = "Gift";
+        break;
+    case 4:
+        category = "Investment";
+        break;
+    case 5:
+        category = "Other";
+        break;
+    }
 
-    cout << "Category: ";
-    getline(cin, category);
-
-    cout << "Description ";
+    cout << "\nDescription ";
     getline(cin, description);
 
     Transaction income(amount, category, description, true);

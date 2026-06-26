@@ -10,4 +10,4 @@ int main()
     FinanceManager app;
     app.run();
     return 0;
-}
+}1

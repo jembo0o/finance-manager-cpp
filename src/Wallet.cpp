@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Wallet.h"
 #include <vector>
+#include <iomanip>
 using namespace std;
 
 void Wallet::addTransaction(const Transaction& transaction)
@@ -26,21 +27,36 @@ double Wallet::getBalance()
 }
 void Wallet::showHistory()
 {
+    cout << fixed << setprecision(2);
+
+    cout << "\n╔════╦══════════╦══════════════╦══════════════╦════════════════════╗\n";
+    cout << "║ ID ║ Type     ║ Category     ║ Amount       ║ Description        ║\n";
+    cout << "╠════╬══════════╬══════════════╬══════════════╬════════════════════╣\n";
+
+    int id = 1;
+
     for (const auto& transaction : transactions)
     {
-        if (transaction.getIncome() == true)
+        string type;
+
+        if (transaction.getIncome())
         {
-            cout << " Income | ";
+            type = "Income";
         }
         else
         {
-            cout << endl;
-            cout << " Expense | ";
+            type = "Expense";
         }
-        cout << transaction.getCategory() << " | "
-             << transaction.getDescription() << " | "
-             << transaction.getAmount() << " | ";
 
+        cout << "║ "
+             << setw(2) << id << " ║ "
+             << left << setw(8) << type << " ║ "
+             << left << setw(12) << transaction.getCategory() << " ║ "
+             << right << setw(12) << transaction.getAmount() << " ║ "
+             << left << setw(18) << transaction.getDescription() << " ║\n";
+
+        id++;
     }
 
+    cout << "╚════╩══════════╩══════════════╩══════════════╩════════════════════╝\n";
 }
