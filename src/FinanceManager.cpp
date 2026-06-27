@@ -87,63 +87,64 @@ void FinanceManager::showMenu()
     cout << "╚══════════════════════════════════════════════╝" << endl;
     cout << "Choose option > ";
 }
-void FinanceManager::addIncome()
+
+double FinanceManager::inputAmount()
 {
     double amount;
-    int categoryChoice;
-    string category;
-    string description;
+    while (true)
+    {
+        cout << "\nAmount: ";
+        cin >> amount;
 
-    cout << "\n╔════════════════════════════╗\n";
-    cout << "║        ADD INCOME          ║\n";
-    cout << "╚════════════════════════════╝\n";
-
-   while (true)
-   {
-       cout << "\nAmount: ";
-       cin >> amount;
-       if (amount > 0)
-       {
-           break;
-       }
-       cout << "Invalid amount! Please enter a value greater than 0\n";
-   }
+        if (amount > 0) { return amount; }
+        cout << "Invalid amount! Please enter a value greater than 0\n";
+    }
+}
+std::string FinanceManager::inputDescription()
+{
+    std::string description;
     cin.ignore();
+    cout << "\nDescription: ";
+    getline(cin, description);
+
+    return description;
+}
+std::string FinanceManager::chooseCategory(const std::vector <std::string>& categories)
+{
+    int categoryChoice;
     while (true)
     {
         cout << "\nChoose category:\n";
-        cout << "1. Salary\n";
-        cout << "2. Freelance\n";
-        cout << "3. Gift\n";
-        cout << "4. Investment\n";
-        cout << "5. Other\n";
+        for (int i = 0; i < categories.size(); i++)
+        {
+            cout << i + 1 << ". " << categories[i] <<  "\n";
+        }
         cout << "> ";
         cin >> categoryChoice;
-        if (categoryChoice >= 1 && categoryChoice <= 5){ break; }
-        cout << "\nInvalid option! Please try again.\n";
+        if (categoryChoice >= 1 && categoryChoice <= categories.size())
+        {
+            return categories[categoryChoice - 1];
+        }
+        cout <<"\nInvalide option! Please try again\n";
     }
-    cin.ignore();
-    switch (categoryChoice)
-    {
-    case 1:
-        category = "Salary";
-        break;
-    case 2:
-        category = "Freelance";
-        break;
-    case 3:
-        category = "Gift";
-        break;
-    case 4:
-        category = "Investment";
-        break;
-    case 5:
-        category = "Other";
-        break;
-    }
+}
 
-    cout << "\nDescription: ";
-    getline(cin, description);
+void FinanceManager::addIncome()
+{
+    cout << "\n╔════════════════════════════╗\n";
+    cout << "║        ADD INCOME          ║\n";
+    cout << "╚════════════════════════════╝\n";
+    double amount = inputAmount();
+    vector<string> incomeCategories = {
+        "Salary",
+        "Freelance",
+        "Gift",
+        "Investment",
+        "Other"
+    };
+
+    string category = chooseCategory(incomeCategories);
+    string description = inputDescription();
 
     Transaction income(amount, category, description, true);
     wallet.addTransaction(income);
@@ -151,75 +152,24 @@ void FinanceManager::addIncome()
 }
 void FinanceManager::addExpense()
 {
-    double amount;
-    int categoryChoice;
-    string category;
-    string description;
-
     cout << "\n╔════════════════════════════╗\n";
     cout << "║        ADD EXPENSE         ║\n";
     cout << "╚════════════════════════════╝\n";
+    double amount = inputAmount();
+    vector<string> expenseCategories = {
+        "Food",
+        "Transport",
+        "Rent",
+        "Entertainment",
+        "Shopping",
+        "Health",
+        "Education",
+        "Bills",
+        "Other"
+    };
 
-    while (true)
-    {
-        cout << "\nAmount: ";
-        cin >> amount;
-        if (amount > 0)
-        {
-            break;
-        }
-        cout << "Invalid amount! Please enter a value greater than 0\n";
-    }
-    while (true)
-    {
-        cout << "\nChoose category:\n";
-        cout << "1. Food\n";
-        cout << "2. Transport\n";
-        cout << "3. Rent\n";
-        cout << "4. Entertainment\n";
-        cout << "5. Shopping\n";
-        cout << "6. Health\n";
-        cout << "7. Education\n";
-        cout << "8. Bills\n";
-        cout << "9. Other\n";
-        cout << "> ";
-        cin >> categoryChoice;
-        if (categoryChoice >= 1 && categoryChoice <= 9){ break; }
-        cout << "\nInvalid option! Please try again.\n";
-    }
-    cin.ignore();
-    switch (categoryChoice)
-    {
-    case 1:
-        category = "Food";
-        break;
-    case 2:
-        category = "Transport";
-        break;
-    case 3:
-        category = "Rent";
-        break;
-    case 4:
-        category = "Entertainment";
-        break;
-    case 5:
-        category = "Shopping";
-        break;
-    case 6:
-        category = "Health";
-        break;
-    case 7:
-        category = "Education";
-        break;
-    case 8:
-        category = "Bills";
-        break;
-    case 9:
-        category = "Other";
-        break;
-    }
-    cout << "\nDescription: ";
-    getline(cin, description);
+    string category = chooseCategory(expenseCategories);
+    string description = inputDescription();
 
     Transaction expense(amount, category, description, false);
     wallet.addTransaction(expense);
