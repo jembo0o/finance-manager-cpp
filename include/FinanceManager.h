@@ -17,6 +17,7 @@ private:
     double inputAmount();
     std::string inputDescription();
     std::string chooseCategory(const std::vector <std::string>& categories);
+    int inputNumber();
 
 public:
     void run();
